@@ -2,6 +2,7 @@ package estudo.individual.Controller;
 
 import estudo.individual.Model.Convidado;
 import estudo.individual.Model.Evento;
+import estudo.individual.Model.Usuario;
 import estudo.individual.Service.ServiceConvidado;
 import estudo.individual.Service.ServiceEvento;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,17 @@ public class ControllerEvento {
     ServiceEvento serviceEvento;
 
     @GetMapping(value = "/eventos")
-    public List<Evento>listarEventos(){
-      return serviceEvento.listarEventos();
+    public List<Evento> listarEventos(@RequestParam("id") Integer id){
+        return serviceEvento.listarEventosId(id);
     }
 
-    @GetMapping(value = "/eventos/{id}")
+    @GetMapping(value = "/evento/{id}")
     public Evento mostrarEvento(@PathVariable("id") Integer id, Convidado convidado){
         return serviceEvento.mostrarEvento(id, convidado);
+    }
+    @PostMapping(value = "/cadastrarevento/{id}")
+    public void cadastrarEventoId(@RequestBody Evento evento, @PathVariable("id") Integer id){
+        serviceEvento.salvarEventoId(id,evento);
     }
 
     @PostMapping(value = "/cadastrar")
@@ -43,8 +48,8 @@ public class ControllerEvento {
 
     }
     @GetMapping(value = "/pesquisar")
-    public List<Evento> pesquisar(@RequestParam("nomepesquisa") String nomepesquisa){
-        return serviceEvento.filtroNome(nomepesquisa);
+    public List<Evento> pesquisar(@RequestParam("nomepesquisa") String nomepesquisa, @RequestParam("id") Integer id){
+        return serviceEvento.filtroNome(nomepesquisa,id);
     }
 
 }

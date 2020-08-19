@@ -2,6 +2,7 @@ package estudo.individual.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -15,6 +16,7 @@ public class Convidado implements Serializable {
     private String email;
     @NotNull
     @Id
+    @Size(max = 11)
     private String rg;
 
     public Evento getEvento() {

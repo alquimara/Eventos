@@ -31,14 +31,15 @@ public class ControleConvidado {
     public void excluirConvidado(@RequestBody Convidado convidado){
         serviceConvidado.excluirConvidado(convidado);
     }
+
     @PutMapping(value = "/atualizarconvidado")
     public void atualizarConvidado(@RequestBody Convidado convidado){
         serviceConvidado.atualizarConvidado(convidado);
 
     }
     @GetMapping(value = "/pesquisarconvidado")
-    public List<Convidado> pesquisarConvidado(@RequestParam("nomepesquisa") String nomepesquisa){
-        return serviceConvidado.filtroNomeConvidado(nomepesquisa);
+    public List<Convidado> pesquisarconvidado(@RequestParam("nomepesquisa") String nomepesquisa, @RequestParam("id") Integer id){
+        return serviceConvidado.filtroNomeConvidado(nomepesquisa,id);
     }
 
 }

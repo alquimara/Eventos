@@ -3,12 +3,12 @@
     <nav>
       <div class="nav-wrapper cor">
         <div class="nav-wrapper" style="margin-top:16px">
-         <router-link  style="margin-left:20px" class="brand-logo" to="/">Events</router-link>
+         <router-link  style="margin-left:20px" class="brand-logo" to="/home">Events</router-link>
         <a href="#"  style="margin-right:30px" class=" right">{{this.$store.state.evento.nome}}</a>
         <ul class="right hide-on-med-and-down">
         <li><a href="sass.html"><i class="material-icons">explicit</i></a></li>
       </ul>
-          <form>
+       <form>
             <div style="margin-left:400px" class="input-field cabecalho">
               <input id="search" placeholder="Buscar" type="search" v-model="nomepesquisa" required />
               <label class="label-icon" for="search">
@@ -16,7 +16,6 @@
               </label>
             </div>
           </form>
-         
         </div>
       </div>
     </nav>
@@ -81,9 +80,7 @@ import convidados from "./../service/convidado.js";
 export default {
   data() {
     return {
-      nomepesquisa: "",
-      modalativo: true,
-      // contatos: [],
+      nomepesquisa: ""
     };
   },
   mounted() {
@@ -107,11 +104,6 @@ export default {
       this.$store.state.convidados= response.data;
       });
     },
-    buscarConvidado() {
-      Convidado.buscarConvidado(this.nomepesquisa).then((response) => {
-        this.$store.state.convidados = response.data;
-      });
-    },
     updateConvidado(convidado) {
       this.$store.state.convidado = convidado;
       this.$router.push('/cadastroconvidado')
@@ -119,6 +111,12 @@ export default {
     detalheConvidado(convidado){
       this.$store.state.convidado = convidado;
       this.$router.push('/convidado')
+    },
+    buscarConvidado(){
+      Convidado.buscarConvidado(this.nomepesquisa, this.$store.state.evento.id).then((response) => {
+        this.$store.state.convidados = response.data;
+      });
+
     },
     deleteConvidado(convidado) {
       Convidado.deleteConvidado(convidado).then((response) => {

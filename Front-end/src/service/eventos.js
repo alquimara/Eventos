@@ -1,13 +1,16 @@
 import{ http } from './config'
 
 export default{
-    getEventos:()=>{
-        return http.get('eventos')
+    getEventos:(id)=>{
+        return http.get('eventos/', {params:{id}})
       },
       getEvento:(id)=>{
-        console.log(id)
-        return http.get('eventos/' + id)
+        return http.get('evento/' + id)
        
+      },
+       createEventoId:(evento, id)=>{
+        return http.post('cadastrarevento/' + id, evento)
+    
       },
       createEvento:(evento)=>{
         return http.post('cadastrar', evento)
@@ -20,7 +23,7 @@ export default{
         return http.delete('/excluir', {data:evento})
     
       },
-      buscarEvento:(nomepesquisa)=>{
-        return http.get('/pesquisar', {params:{nomepesquisa}})
+      buscarEvento:(nomepesquisa, id)=>{
+        return http.get('/pesquisar/' , {params:{nomepesquisa, id}})
       }
 }

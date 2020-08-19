@@ -14,7 +14,7 @@
         <br />Email
         <input v-model="usuario.email" type="text" />
         <br />Senha
-        <input v-model="usuario.rg" type="password" />
+        <input v-model="usuario.senha" type="password" />
         <br />
         <button style="margin-left:990px" class="btn waves-effect cor" type="submit">
           Cadastrar
@@ -44,9 +44,9 @@ export default {
     Usuario.createUsuario(this.usuario).then((response) => {
         this.$store.state.usuario = this.usuario
         alert("Usuario salvo com sucesso");
-        this.$router.push('/login')
+        this.$router.push('/')
     });
-  }
+  },
 }
 }
 </script>

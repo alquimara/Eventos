@@ -7,6 +7,8 @@ import estudo.individual.Repository.RepositoryUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServiceUsuario {
     @Autowired
@@ -14,5 +16,9 @@ public class ServiceUsuario {
 
     public void salvarUsuario(Usuario usuario){
         repositoryUsuario.save(usuario);
+    }
+    public List<Usuario> mostrarUsuarios(){
+        return repositoryUsuario.findAll();
+
     }
 }

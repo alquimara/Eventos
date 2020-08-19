@@ -4,9 +4,9 @@
       <div class="nav-wrapper cor">
         <div class="nav-wrapper" style="margin-top:16px">
        <router-link  style="margin-left:20px" class="brand-logo" to="/">Events</router-link>
-        <a href="#"  style="margin-right:30px" class=" right">Andre Matos</a>
+        <a  @click="logout()"  style="margin-right:30px" class=" right mouse">{{this.$store.state.usuario.nome}}</a>
         <ul class="right hide-on-med-and-down">
-        <li><a href="sass.html"><i class="material-icons">account_circle</i></a></li>
+        <li><a ><i class="material-icons">account_circle</i></a></li>
       </ul>
           <form>
             <div style="margin-left:400px" class="input-field cabecalho">
@@ -68,9 +68,7 @@ import eventos from "./../service/eventos.js";
 export default {
   data() {
     return {
-      nomepesquisa: "",
-      modalativo: true,
-      // contatos: [],
+      nomepesquisa: ""
     };
   },
   mounted() {
@@ -90,14 +88,13 @@ export default {
   methods: {
 
     getEventos() {
-      Evento.getEventos().then((response) => {
+      Evento.getEventos(this.$store.state.usuario.id).then((response) => {
         this.$store.state.eventos= response.data;
       });
     },
     buscarEvento() {
-      Evento.buscarEvento(this.nomepesquisa).then((response) => {
+      Evento.buscarEvento(this.nomepesquisa, this.$store.state.usuario.id).then((response) => {
         console.log(this.$store.state.eventos)
-        this.$store.state.eventos = response.data;
       });
     },
     cadastro(){
@@ -113,6 +110,12 @@ export default {
       this.$store.state.evento = evento;
       this.$router.push('/convidado')
       
+    },
+    logout(){
+       this.$router.push('/')
+       this.$store.state.usuario = {}
+
+
     },
     deleteEvento(evento) {
       Evento.deleteEvento(evento).then((response) => {

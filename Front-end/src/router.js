@@ -16,7 +16,7 @@ export default new Router(
             {
                 mode: "history",
                 path: "/",
-                component: home
+                component: login
 
             },
             {
@@ -32,12 +32,12 @@ export default new Router(
                 component: cadastroConvidado
             },
             {
-                path:"/cadastrousuario",
-                component: usuario
+                path:"/home",
+                component: home
             },
             {
-                path:"/login",
-                component: login
+                path:"/cadastrousuario",
+                component: usuario
             }
 
         ]

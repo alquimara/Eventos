@@ -23,6 +23,26 @@ public class Evento implements Serializable {
     private String datae;
     @NotNull
     private String horario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @ManyToOne
+    private Usuario usuario;
+
+    public List<Convidado> getConvidado() {
+        return convidado;
+    }
+
+    public void setConvidado(List<Convidado> convidado) {
+        this.convidado = convidado;
+    }
+
     @OneToMany
     private List<Convidado> convidado;
 

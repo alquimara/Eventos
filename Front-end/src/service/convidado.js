@@ -13,9 +13,8 @@ export default{
       },
       deleteConvidado:(convidado)=>{
         return http.delete('/excluirconvidado', {data:convidado})
-    
       },
-      buscarConvidado:(nomepesquisa)=>{
-        return http.get('/pesquisarconvidado', {params:{nomepesquisa}})
+      buscarConvidado:(nomepesquisa, id)=>{
+        return http.get('/pesquisarconvidado/' , {params:{nomepesquisa, id}})
       }
 }

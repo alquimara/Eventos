@@ -4,5 +4,8 @@ export default{
     
       createUsuario:(usuario)=>{
         return http.post('cadastrarUsuario', usuario)
+      },
+      listaUsuario:()=>{
+        return http.get('usuarios')
       }
 }

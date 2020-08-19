@@ -26,6 +26,7 @@ export default new Vuex.Store({
             senha:""
 
         },
-        convidados:[]
+        convidados:[],
+        usuarios:[]
     }
 });

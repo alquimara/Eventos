@@ -2,7 +2,7 @@
 <div>
      <nav>
     <div class="nav-wrapper cor">
-      <a href="#" class="brand-logo center">Cadastro Usuario</a>
+      <a href="#" class="brand-logo center">Login</a>
     </div>
   </nav>
         
@@ -13,9 +13,12 @@
         <br />Senha
         <input v-model="usuario.senha" type="password" />
         <br />
-        <button style="margin-left:990px" class="btn waves-effect cor" type="submit">
+        <router-link  to="/cadastrousuario"><button  class="btn waves-effect cor" type="submit">
+          Cadastrar-se
+        </button>
+        </router-link>
+        <button style="margin-left:850px" class="btn waves-effect cor" type="submit">
           Login
-         <i class="material-icons right">save</i>
         </button>
       </form>
     </div>
@@ -29,21 +32,34 @@ export default {
   data() {
     return {
       usuario: {
-        id: "",
-        nome: "",
         email: "",
         senha: ""
       },
+      usuarios:[]
     };
   },
+   mounted() {
+    this.mostrarUsuarios();
+  },
   methods: {
-   login() {
-       if(this.usuario == this.$store.state.usuario){
-           console.log(this.usuario)
-       }
-       
+   mostrarUsuarios() {
+    Usuario.listaUsuario().then((response)=>{
+    this.$store.state.usuarios = response.data
+    this.usuarios =  this.$store.state.usuarios;
+    })
+  },
+  login(){
+    for(let u=0; u<this.usuarios.length; u++){
+     if(this.usuarios[u].email == this.usuario.email && this.usuarios[u].senha == this.usuario.senha){
+       this.$store.state.usuario = this.usuarios[u]
+       console.log(this.usuarios[u].email == this.usuario.email && this.usuarios[u].senha == this.usuario.senha)
+       this.$router.push('/home')
+
+     }
+     
+    }
   }
-}
+  }
 }
 </script>
 <style>

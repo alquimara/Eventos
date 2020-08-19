@@ -56,12 +56,12 @@ export default {
           this.evento.endereco != "" &&
           this.evento.cidade != ""
         ) {
-          Evento.createEvento(this.evento).then((response) => {
+          Evento.createEventoId(this.evento, this.$store.state.usuario.id).then((response) => {
             console.log(this.evento)
             this.$store.state.evento = this.evento
             this.$store.state.evento={}
             alert("evento salvo com sucesso");
-            this.$router.push('/')
+            this.$router.push('/home')
           });
         } else {
           alert("nenhum campo pode ficar vazio");
@@ -70,7 +70,7 @@ export default {
         Evento.updateEvento(this.evento).then((response) => {
           this.$store.state.evento = {};
           alert("evento atualizado com sucesso");
-          this.$router.push('/')
+          this.$router.push('/home')
         });
       }
     },

@@ -14,7 +14,7 @@
         <br />Email
         <input v-model="convidado.email" type="text" />
         <br />RG
-        <input v-model="convidado.rg" type="text" />
+        <input v-model="convidado.rg" type="text" size="11" />
         <br />
         <button style="margin-left:990px" class="btn waves-effect cor" type="submit">
           salvar

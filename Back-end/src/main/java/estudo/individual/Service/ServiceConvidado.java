@@ -2,6 +2,7 @@ package estudo.individual.Service;
 
 import estudo.individual.Model.Convidado;
 import estudo.individual.Model.Evento;
+import estudo.individual.Model.Usuario;
 import estudo.individual.Repository.RepositoryConvidado;
 import estudo.individual.Repository.RepositoryEvento;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ServiceConvidado {
 
     public List<Convidado> listarConvidados(Integer id){
         Evento ev = repositoryEvento.findOne(id);
-          return repositoryConvidado.findConvidadoByEvento(ev);
+        return repositoryConvidado.findConvidadoByEvento(ev);
     }
 
     public Convidado getConvidado(Integer id){
@@ -30,15 +31,16 @@ public class ServiceConvidado {
         convidado.setEvento(ev);
         repositoryConvidado.save(convidado);
     }
+    public List<Convidado> filtroNomeConvidado(@RequestParam("nomepesquisa") String nomepesquisa, @RequestParam("id") Integer id){
+        Evento ev = repositoryEvento.findOne(id);
+        return repositoryConvidado.findConvidadoByNomeIgnoreCaseaAndEvento(nomepesquisa, ev);
+
+    }
 
     public void excluirConvidado( Convidado convidado){
         repositoryConvidado.delete(convidado);
     }
     public void atualizarConvidado(Convidado convidado){
         repositoryConvidado.save(convidado);
-    }
-    public List<Convidado> filtroNomeConvidado(@RequestParam("nomepesquisa") String nomepesquisa){
-        return repositoryConvidado.findConvidadoByNome(nomepesquisa);
-
     }
 }
